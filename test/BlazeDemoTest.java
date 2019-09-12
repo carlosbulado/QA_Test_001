@@ -3,6 +3,10 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class BlazeDemoTest
 {
@@ -12,11 +16,20 @@ public class BlazeDemoTest
 	//    destination select: toPort
 	// Classes
 	//    find flights: btn
+	
+
+	final String CHROMEDRIVER_LOCATION = "/Users/cjb/Downloads/chromedriver";
+	final String URL_TO_TEST = "http://blazedemo.com/";
+	
+	WebDriver driver;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		
+		System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_LOCATION);
+        driver = new ChromeDriver();
+		driver.get(URL_TO_TEST);
+        Thread.sleep(1000);
 	}
 
 	@After
