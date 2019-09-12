@@ -1,9 +1,12 @@
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -50,9 +53,23 @@ public class BlazeDemoTest
 	}
 
 	@Test
-	public void Test_TC2_VirginAmericaFligthNumber12Details()
+	public void Test_TC2_VirginAmericaFligthNumber12Details() throws InterruptedException 
 	{
+        WebElement findFlightsBtn = driver.findElement(By.tagName("input"));
+        findFlightsBtn.click();
+		Thread.sleep(1000);
 		
+		WebElement virginAmericaNumber12Details = driver.findElement(By.name("VA12"));
+		WebElement parentVirginAmericaNumber12Details = (WebElement) ((JavascriptExecutor) driver).executeScript(
+                "return arguments[0].parentNode;", virginAmericaNumber12Details);
+		List<WebElement> details = parentVirginAmericaNumber12Details.findElements(By.tagName("td"));
+		String departTime = details.get(3).getText();
+		String arriveTime = details.get(4).getText();
+		String cost = details.get(5).getText();
+		
+		assertEquals("11:23 AM", departTime);
+		assertEquals("1:45 PM", arriveTime);
+		assertEquals("$765.32", cost);
 	}
 
 	@Test
