@@ -73,9 +73,29 @@ public class BlazeDemoTest
 	}
 
 	@Test
-	public void Test_TC3_PurchaseConfirmationPage()
+	public void Test_TC3_PurchaseConfirmationPage() throws InterruptedException 
 	{
+        WebElement findFlightsBtn = driver.findElement(By.tagName("input"));
+        findFlightsBtn.click();
+		Thread.sleep(1000);
 		
+        WebElement chooseAFlightBtn = driver.findElement(By.tagName("input"));
+        chooseAFlightBtn.click();
+		Thread.sleep(1000);
+
+        WebElement purchaseFlightBtn = driver.findElement(By.className("btn-primary"));
+        purchaseFlightBtn.click();
+		Thread.sleep(1000);
+		
+        WebElement tableWithFlightsInfo = driver.findElement(By.tagName("table"));
+		List<WebElement> details = tableWithFlightsInfo.findElements(By.tagName("tr"));
+		
+		String id = details.get(1).getText();
+		id = id.replace("Id ", "");
+		String date = details.get(7).getText();
+		
+		assertEquals(13, id.length());
+		assertTrue(date.contains("12 Sep 2019"));
 	}
 
 }
