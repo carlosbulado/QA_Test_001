@@ -31,7 +31,16 @@ public class SnakeTest
 	@Test
 	public void Test_TC2_TestFitsInCageFunction()
 	{
+		// Looking at fitsInCage, it receive a param which is the cage lenght, this test should be correct if
+		//    the snake's lenght is less than cage's length ONLY
+		assertEquals(true, peter.fitsInCage(11));
+		assertEquals(true, takis.fitsInCage(81));
 		
+		assertEquals(false, peter.fitsInCage(10));
+		assertEquals(false, takis.fitsInCage(80));
+
+		assertEquals(false, peter.fitsInCage(9));
+		assertEquals(false, takis.fitsInCage(79));
 	}
 
 }
