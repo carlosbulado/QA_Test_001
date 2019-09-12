@@ -29,19 +29,24 @@ public class BlazeDemoTest
 		System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_LOCATION);
         driver = new ChromeDriver();
 		driver.get(URL_TO_TEST);
+		// Wait 1 second before continue the test case
         Thread.sleep(1000);
 	}
 
 	@After
 	public void tearDown() throws Exception
 	{
-		
+		// Wait 4 seconds before close the browser
+		Thread.sleep(4000);
+        driver.close();
 	}
 
 	@Test
 	public void Test_TC1_DepartureCities()
 	{
-		
+        WebElement departuresSelect = driver.findElement(By.name("fromPort"));
+        int quant_opts_departure = departuresSelect.findElements(By.tagName("option")).size();
+        assertEquals(7, quant_opts_departure);
 	}
 
 	@Test
